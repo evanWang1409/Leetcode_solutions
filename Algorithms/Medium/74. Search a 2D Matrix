@@ -1,0 +1,32 @@
+74. Search a 2D Matrix
+
+Note: 
+transform to binary search
+In binary search, in updating end or start, update to end = mid - 1 or start = mid + 1
+end search when start > end
+
+class Solution:    
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+        rows = len(matrix);
+        if(rows == 0):
+            return False
+        cols = len(matrix[0]);
+        if(cols == 0):
+            return False
+        arr_len = rows*cols - 1;
+        start = 0;
+        end = arr_len;
+        
+        
+        while(True):
+            mid = int((start+end)/2)
+            m,n = int(mid/cols), mid%cols
+            if(start > end):
+                return False
+            
+            if(matrix[m][n] == target):
+                return True
+            elif(matrix[m][n] > target):
+                end = mid-1
+            else:
+                start = mid+1
